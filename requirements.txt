@@ -1,0 +1,12 @@
+pandas
+numpy
+setuptools
+scikit-learn
+joblib
+imbalanced-learn
+mlflow
+flask
+lightgbm
+matplotlib
+seaborn
+kfp # Kubeflow Pipelines SDK
