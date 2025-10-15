@@ -158,6 +158,7 @@ class ModelTraining:
          
         try:
             with mlflow.start_run():
+                
                 logger.info("Starting our Model Training pipeline")
 
                 logger.info("Starting our MLFLOW experimentation")

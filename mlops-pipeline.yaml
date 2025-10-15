@@ -1,0 +1,46 @@
+# PIPELINE DEFINITION
+# Name: mlops-pipeline-project-09
+# Description: Kubeflow Pipeline - 09
+components:
+  comp-data-processing-step:
+    executorLabel: exec-data-processing-step
+  comp-model-training-step:
+    executorLabel: exec-model-training-step
+deploymentSpec:
+  executors:
+    exec-data-processing-step:
+      container:
+        command:
+        - python
+        - src/data_preprocessing.py
+        image: thilina9718/mlops-project-09-app:latest
+    exec-model-training-step:
+      container:
+        command:
+        - python
+        - src/model_training.py
+        image: thilina9718/mlops-project-09-app:latest
+pipelineInfo:
+  description: Kubeflow Pipeline - 09
+  name: mlops-pipeline-project-09
+root:
+  dag:
+    tasks:
+      data-processing-step:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-data-processing-step
+        taskInfo:
+          name: data-processing-step
+      model-training-step:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-model-training-step
+        dependentTasks:
+        - data-processing-step
+        taskInfo:
+          name: model-training-step
+schemaVersion: 2.1.0
+sdkVersion: kfp-2.9.0
